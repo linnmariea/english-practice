@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Practice</title>
+    <meta name="theme-color" content="#3159b7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="English Practice" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Engelsk – selvstendig arbeid</p>
+        <h1>English Practice</h1>
+      </div>
+      <nav class="tabs" aria-label="Velg visning">
+        <button class="tab active" data-view="pupil" type="button">Elev</button>
+        <button class="tab" data-view="teacher" type="button">Lærer / resultater</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="pupilView" class="view">
+        <div class="pupil-layout">
+          <aside class="profile-card">
+            <div class="avatar" aria-hidden="true">EL</div>
+            <div>
+              <label for="pupilSelect">Velg elevkode</label>
+              <select id="pupilSelect"></select>
+            </div>
+            <div class="support-card" id="supportCard">
+              <span>Tilrettelagte hjelpemidler</span>
+              <strong id="supportText">Lesevennlig visning</strong>
+            </div>
+            <p id="syncStatus" class="sync-status" role="status" aria-live="polite">Svar og framgang lagres lokalt på denne iPaden, ikke på lærerens enhet.</p>
+            <p id="offlineStatus" class="sync-status" role="status" aria-live="polite">Åpne appen med nett én gang for å klargjøre den for offline bruk.</p>
+            <div class="level-card">
+              <span id="currentLevelLabel">Nåværende nivå</span>
+              <strong id="currentLevel">1 av 3</strong>
+            </div>
+            <button id="readingModeButton" class="secondary reading-mode-button" type="button" aria-pressed="false">
+              Lesevennlig visning
+            </button>
+            <div class="voice-card">
+              <label for="voiceSelect">Norsk tale</label>
+              <select id="voiceSelect"></select>
+              <p id="voiceStatus" aria-live="polite">Søker etter installerte stemmer…</p>
+            </div>
+          </aside>
+
+          <article id="regularPractice" class="practice-card">
+            <div class="practice-header">
+              <div>
+                <p class="eyebrow" id="skillName">Ordforråd</p>
+                <h2 id="taskTitle">Velg riktig ord</h2>
+              </div>
+              <div class="progress-count" id="taskCount">Oppgave 1 av 6</div>
+            </div>
+
+            <div class="task-area">
+              <div id="wordVisual" class="word-visual" aria-hidden="true"></div>
+              <p id="questionText" class="question"></p>
+              <div id="answerOptions" class="options"></div>
+              <input id="textAnswer" class="text-answer" type="text" autocomplete="off" />
+
+              <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+              <div class="actions">
+                <button id="speakButton" class="secondary" type="button">🔊 Les høyt</button>
+                <button id="hintButton" class="secondary" type="button">Vis hint</button>
+                <button id="checkButton" class="primary" type="button">Sjekk svar</button>
+              </div>
+
+              <p id="hintText" class="hint"></p>
+            </div>
+
+            <div class="adaptation-box">
+              <strong>Hvordan nivået tilpasses</strong>
+              <p>Riktig svar styrker øvingen. For begynnerordforråd holdes oppgavene korte og grunnleggende til eleven viser sikkerhet over tid. Dette er en enkel øvelse, ikke en endelig vurdering.</p>
+            </div>
+          </article>
+
+          <article id="beginnerPractice" class="practice-card hidden">
+            <header class="practice-header beginner-header">
+              <div>
+                <p class="eyebrow">Øving i eget tempo</p>
+                <h2 id="beginnerActivityTitle">Hør og velg</h2>
+                <p id="beginnerActivityDescription" class="activity-description"></p>
+              </div>
+            </header>
+
+            <nav class="activity-tabs" aria-label="Øvingsprogresjon">
+              <button class="activity-tab active" data-activity="choose-two" type="button">Hør og velg · 2 bilder</button>
+              <button class="activity-tab" data-activity="choose-three" type="button" disabled>Hør og velg · 3 bilder</button>
+              <button class="activity-tab" data-activity="listen-do" type="button" disabled>Hør og gjør</button>
+              <button class="activity-tab" data-activity="phrase" type="button" disabled>Bruk en frase</button>
+            </nav>
+
+            <div class="task-area activity-area">
+              <p id="activityPrompt" class="question"></p>
+              <div id="activityVisual" class="activity-visual"></div>
+              <button id="activityListenButton" class="secondary activity-listen" type="button">🔊 Hør</button>
+              <div id="activityOptions" class="activity-options"></div>
+              <div id="activityFeedback" class="feedback empty" role="status" aria-live="polite"></div>
+
+              <div class="activity-footer">
+                <span id="activityProgress" class="progress-count"></span>
+                <button id="activityNextButton" class="primary" type="button">Neste når jeg er klar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="teacherView" class="view hidden">
+        <div class="dashboard-heading">
+          <div>
+            <p class="eyebrow">Pilot – bruk pseudonyme elevkoder</p>
+            <h2>Elevresultater</h2>
+          </div>
+          <div class="teacher-actions">
+            <button id="exportResults" class="primary" type="button">Last ned resultater fra denne iPaden (CSV)</button>
+            <button id="resetDemo" class="secondary" type="button">Nullstill denne iPaden</button>
+          </div>
+        </div>
+
+        <p class="pilot-notice">Oversikten viser bare resultater som er lagret på denne iPaden. Last ned CSV-filen og legg den i skolens private Teams-område for å samle resultatene fra flere iPader. Bruk elevkoder, ikke navn.</p>
+        <div class="summary-grid" id="summaryGrid"></div>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <h3>Fremgang per elev</h3>
+            <div id="pupilRows"></div>
+          </article>
+          <article class="panel">
+            <h3>Områder å øve på</h3>
+            <div id="practiceAreas"></div>
+          </article>
+        </div>
+
+        <article class="panel attempt-panel">
+          <h3>Siste aktiviteter</h3>
+          <div id="attemptList"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
